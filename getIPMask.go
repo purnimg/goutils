@@ -1,5 +1,5 @@
 /* 
-IP: Takes IP mask and subnet number and prints network details
+IP: Takes IP address and prints network details
 */
 
 package main
@@ -8,18 +8,15 @@ import (
 				"fmt"
 				"net"
 				"os"
-				"strconv"
 )
 
 func main(){
-				if len(os.Args) !=4 {
-								fmt.Fprintf(os.Stderr, "Usage: %s dotted-ip-addr ones bits \n", os.Args[0])
+				if len(os.Args) !=2 {
+								fmt.Fprintf(os.Stderr, "Usage: %s dotted-ip-addr \n", os.Args[0])
 								os.Exit(1)
 				}
 
 				dotAddr := os.Args[1]
-				ones, _ := strconv.Atoi(os.Args[2])
-				bits, _ := strconv.Atoi(os.Args[3])
 
 				addr := net.ParseIP(dotAddr)
 
@@ -28,12 +25,17 @@ func main(){
 								os.Exit(1)
 				}
 
-			
-				if addr == nil {
-								fmt.Println("Invalid Address")
-				} else {
-								fmt.Println("The address is ", addr.String())
-				}
+				mask := addr.DefaultMask()
+				network := addr.Mask(mask)
+
+				ones, bits :=mask.Size()
+
+				fmt.Println("Address is ", addr.String(),
+				"\nDefault mask length is ", bits,
+				"\nLeading ones count is ", ones,
+				"\nMask is (hex) ",mask.String(),
+				"\nNetwork is ", network.String())
+
 				os.Exit(0)
 }
 
