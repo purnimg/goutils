@@ -12,15 +12,15 @@ import (
 
 func main() {
 	name := person.Person_Name{
-		Family: "Gunturu",
-		Personal: "Purnima"}
+		LastN: "Gunturu",
+		GivenN: "Purnima"}
 
 	email1 := person.Person_Email{
-		Kind: "Work",
-		Address: "xxx1@gmail.com"}
+		Type: "Work",
+		Id: "xxx1@gmail.com"}
 	email2 := person.Person_Email{
-		Kind: "Home",
-		Address: "xxx2@gmail.com"}
+		Type: "Home",
+		Id: "xxx2@gmail.com"}
 
 	emails := []*person.Person_Email{&email1, &email2}
 	p := person.Person{

@@ -3,13 +3,13 @@ package person;
 
 message Person{
 	message Name{
-		string family = 1;
-		string personal = 2;
+		string lastN = 1;
+		string givenN = 2;
 	}
 	
 	message Email{
-		string kind = 1;
-		string address = 2;
+		string type = 1;
+		string id = 2;
 	}
 
 	Name name = 1;
